@@ -16,7 +16,7 @@
             <strong>Producto agregado con éxito</strong> ¡Revísalo en la pestaña de inicio!.
           </div>
         {% endif %}
-        <form action="agregarproducto" method="POST">
+        <form action="agregarproducto" method="POST" enctype="multipart/form-data">
           {% csrf_token %}
           <h5> Agregar nuevo producto al catálogo</h5>
           <div class="row">
@@ -26,28 +26,28 @@
               <p>Valor: </p><input class="form-control" id="nombre" name="valor" placeholder="$ valor en CLP" type="number" required>
               <p>Color: </p><div class="form-group">
               <select name="color">
-                <option value="Rojo">Rojo</option>
-                <option value="Azul">Azul</option>
-                <option value="Amarillo">Amarillo</option>
-                <option value="Verde">Verde</option>
-                <option value="Blanco">Blanco</option>
-                <option value="Negro">Negro</option>
-                <option value="Otro">Otro</option>
+                <option value=1>Rojo</option>
+                <option value=2>Azul</option>
+                <option value=3>Amarillo</option>
+                <option value=4>Verde</option>
+                <option value=5>Blanco</option>
+                <option value=6>Negro</option>
+                <option value=7>Otro</option>
               </select>
             </div>
               <p>Tipo: </p><div class="form-group">
               <select name="tipo">
-                <option value="Crop Top">Crop Top</option>
-                <option value="Gorro">Gorro</option>
-                <option value="Bufanda">Bufanda</option>
-                <option value="Otro">Otro</option>
+                <option value=1>Crop Top</option>
+                <option value=2>Gorro</option>
+                <option value=3>Bufanda</option>
+                <option value=4>Otro</option>
               </select>
             </div>
             
-            <p>Stock: </p><input class="form-control" id="nombre" name="stocl" placeholder="Stock" type="number" required>
+            <p>Stock: </p><input class="form-control" id="nombre" name="stock" placeholder="Stock" type="number" required>
             <div class="form-group">
               <label for="exampleFile">Foto</label>
-              <input type="file" class="form-control-file" id="exampleFile">
+              <input type="file" name="foto" class="form-control-file" id="exampleFile">
             </div>
           </div>
         </div>

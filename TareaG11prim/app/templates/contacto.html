@@ -29,19 +29,22 @@ Contacto
       <h5> ¿Quieres algo que no está en el catálogo? Te contactaré.</h5>
       <div class="row">
         <br>
-        <form action="contacto" method="POST">
+        <form action="contacto" method="POST" enctype="multipart/form-data">
           {% csrf_token %}
           <div class="col-sm-6 form-group">
             <input class="form-control" id="nombre" name="nombre" placeholder="Nombre" type="text" required>
           </div>
           <div class="col-sm-6 form-group">
-            <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+            <input class="form-control" id="email" name="correo" placeholder="Email" type="email" required>
           </div>
       </div>
-      <textarea class="form-control" id="comments" name="comments" placeholder="Mensaje" rows="5"></textarea><br>
+      <textarea class="form-control" id="comments" name="mensaje" placeholder="Mensaje" rows="5"></textarea><br>
       <div>
         <p> ¿No sabes como describirlo? ¡Adjunta una imagen de referencia!</p>
-        <input class="form.control" type="file" size="50" id="5d702e063c362" name="archivos[]">
+         <div class="form-group">
+              <label for="exampleFile">Foto</label>
+              <input type="file" name="foto" class="form-control-file" id="exampleFile">
+            </div>
       </div>
       <br>
       <div class="row">

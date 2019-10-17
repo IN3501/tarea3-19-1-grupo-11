@@ -25,7 +25,7 @@ class Productos(models.Model):
 	color = models.IntegerField(choices=_COLOR_TYPES )
 	tipo = models.IntegerField(choices=_TIPO_TYPES)
 	stock = models.IntegerField()
-	foto = models.ImageField(default=None)
+	foto = models.ImageField(upload_to='static/images/')
 
 
 class Novedades(models.Model):
@@ -37,8 +37,8 @@ class Novedades(models.Model):
 class Mensajes(models.Model):
 	nombre = models.CharField(max_length=45, blank=False)
 	correo = models.CharField(max_length=45, blank=False)
-	descripcion = models.CharField(max_length=300, blank=False)
-	foto = models.ImageField(default=None)
+	mensaje = models.CharField(max_length=300, blank=False)
+	foto = models.ImageField(upload_to='static/images/')
 	fecha = models.DateField(auto_now=True)
 
 class Carro(models.Model):
