@@ -1,0 +1,63 @@
+{% extends 'navbar.html' %}
+{% block title %}
+Pedido exitoso
+{% endblock title %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <h2>Pedido realizado con éxito.</h2> <br>
+      <strong>Código de pedido: XADDSF</strong>
+      <br>
+      <br>
+      Se debe envíar tranferencia bancaria a: <br><br>
+      <strong>
+        <p>Cuenta Vista Banco estado</p>
+        <p>
+          Nombre: Valentina Garrido.</p>
+        <p> rut: 1.111.111-9</p>
+        <p> Número de cuenta: 1.111.111</p>
+        <p>Corre0: tejidosvali@gmail.com</p>
+      </strong>
+      <br><br>La transferencia debe ser realizada dentro de las primeras 24 horas y adjuntar el código identificador del pedido.
+      Si luego de pasadas 24 horas de la recepción del pedido no se ha recibido la transferencia, el pedido será eliminado.
+    </div>
+    <div class="col-sm-6">
+      <table class="table table-image">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Imagen</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Color</th>
+            <th scope="col">Precio</th>
+            <th scope="col"> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td class="w-25">
+              <img src="static/images/foto2.jpg" alt="Crop Top manga caida" class="img-fluid img-thumbnail" width="100" height="50">
+            </td>
+            <td>Crop Top Manga caida</td>
+            <td> Morado</td>
+            <td>7.000</td>
+          </tr>
+          <tr>
+            <th scope="row"></th>
+            <td class="w-25">
+              Total:
+            </td>
+            <td></td>
+            <td> </td>
+            <td></td>
+            <td>7.000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock content %}
