@@ -34,8 +34,9 @@ Inicio
               <p><strong>{{p.nombre}}</strong></p>
               <p>{{p.valor}} c/u</p>
               <p>{{p.stock}}</p>
-              <form action="" method="POST">
+              <form action="agregarcarrito" method="POST">
                 {% csrf_token %}
+                <input type="hidden" name="producto" value={{p.pk}}>
                 <p><input type="submit" value="Agregar" name="agregar"></p>
               </form>
             </div>

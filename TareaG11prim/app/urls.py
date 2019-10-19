@@ -12,4 +12,8 @@ urlpatterns = [
 	path('agregarpublicacion', agregarpublicacion,  name ='agregarpublicacion'),
 	path('novedades', novedades,  name ='novedades'),
 	path('mensajes', mensajes,  name ='mensajes'),
+	path('borrarmensaje', borrarmensaje,  name ='borrarmensaje'),
+	path('borrarencarrito', borrarencarrito,  name ='borrarencarrito'),
+	path('agregarcarrito', agregarcarrito,  name ='agregarcarrito'),
+	path('finalizarpedido', finalizarpedido,  name ='finalizarpedido'),
 ]

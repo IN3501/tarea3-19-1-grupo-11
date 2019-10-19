@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import *
-
+#esto es mientras 
+carrito_key=0
 # Create your views here.
 def inicio(request):
 	# if this is a POST request we need to process the form data
@@ -22,12 +23,13 @@ def contacto(request):
 			nombre = request.POST.get('nombre')
 			correo = request.POST.get('correo')
 			mensaje = request.POST.get('mensaje')
-			foto = request.FILES['foto']
+			if request.FILES:
+				foto = request.FILES['foto']
+			else:
+				foto=None	
 			mensaje= Mensajes(nombre=nombre, correo=correo, mensaje=mensaje, foto=foto )
 			mensaje.save()
 			return render(request, 'contacto.html', {'success': 1, 'nombre':nombre})
-	
-
 	return render(request, 'contacto.html')
 
 def agregarproducto(request):
@@ -51,13 +53,37 @@ def login(request):
 	return render(request, 'login.html')
 
 def carrito(request):
+	contexto= {}
+	carro =Carro.objects.filter(pk=carrito_key).first()
+	contexto['carro'] = carro
+	if carro:
+		contexto['productos']= contexto['carro'].productos.all()
+		valor= 0
+		for p in contexto['productos']:
+			valor += p.valor
+		contexto['valor']= valor	
+	
 	if request.method == 'POST':
+		nombre = request.POST.get('nombre')
+		correo = request.POST.get('correo')
+		ciudad = request.POST.get('ciudad')
+		contexto['nombre'] = nombre
+		contexto['correo'] = correo
+		contexto['ciudad'] = ciudad
+		pedido= Pedidos(carrito=contexto['carro'], nombre=nombre, correo=correo, ciudad=ciudad, precio=valor)
+		pedido.save()
+		carro.activo = False
+
+		return render(request, 'exito.html', contexto)
 		
-		return redirect('exito')
-	return render(request, 'carrito.html')	
+	return render(request, 'carrito.html', contexto)	
 
 def pedidos(request):
-	return render(request, 'pedidos.html')	
+	contexto= {}
+	pedidos = Pedidos.objects.filter(finalizado = False)
+	print(pedidos)
+	contexto['pedidos'] = pedidos
+	return render(request, 'pedidos.html',contexto)	
 
 
 def exito(request):
@@ -83,3 +109,43 @@ def mensajes(request):
 	contexto['mensajes']= Mensajes.objects.all()
 
 	return render(request, 'mensajes.html', contexto)		
+
+def borrarmensaje(request):	
+	if request.method == 'POST':
+		mensaje = request.POST.get('mensaje')
+		m = Mensajes.objects.filter(pk=mensaje)
+		m.delete()
+	return redirect('/mensajes')
+
+def borrarencarrito(request):
+	if request.method == 'POST':
+		producto = request.POST.get('producto')
+		carro = request.POST.get('carro')
+		#revisar esto
+		c = Carro.objects.filter(pk=carro).first()
+		p = Productos.objects.filter(pk=producto).first()
+		c.productos.remove(p)	
+	return redirect('/carrito')
+
+def agregarcarrito(request):
+	if request.method == 'POST':
+		producto = request.POST.get('producto')
+		p= Productos.objects.filter(pk=producto).first()
+		c = Carro.objects.filter(pk=carrito_key).first()
+		if not c:
+			c= Carro(pk=carrito_key)
+			c.save()	
+		c.productos.add(p)
+		c.save()
+	return redirect('/')
+
+def finalizarpedido(request):
+	if request.method == 'POST':
+		pedido = request.POST.get('pedido')
+		p = Pedidos.objects.filter(pk=pedido).first()
+		p.finalizado = True
+		p.save()
+	return redirect('/pedidos')
+
+
+

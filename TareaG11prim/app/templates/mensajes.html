@@ -19,11 +19,18 @@
           <tr>
             <th scope="row">{{m.mensaje}}</th>
             <td class="w-15">
+              {% if m.foto %}
               <img src="{{m.foto.url}}" alt="Crop Top manga caida" class="img-fluid img-thumbnail" width="100" height="50">
+              {% endif %}
             </td>
             <td>{{m.nombre}}<br>
-            {{m.correo}}</td>
-            <td><input type="submit" value="X" name="agregar"></td>
+            {{m.correo}}
+            {{m.pk}}</td>
+            <form action="borrarmensaje" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <input type="hidden" name="mensaje" value={{m.pk}}>
+              <td><input type="submit" value="X" name="borrar"></td>
+            </form>
           </tr>
         {% endfor %}
       </tbody>
